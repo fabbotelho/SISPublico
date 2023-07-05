@@ -1,0 +1,5 @@
+package com.boavistainfo.bvsis.services;
+
+public class ClienteService {
+
+}

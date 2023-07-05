@@ -1,0 +1,18 @@
+package com.boavistainfo.bvsis.resources;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.boavistainfo.bvsis.entities.Cliente;
+
+@RestController
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
+	
+	public ResponseEntity<Cliente> findAll(){
+		Cliente c = new Cliente(1L,"fabricio","Rua A"," 95","","Alto","20.531-480","21 99695-9344","","")	;
+		return ResponseEntity.ok().body(c);
+	}
+
+}

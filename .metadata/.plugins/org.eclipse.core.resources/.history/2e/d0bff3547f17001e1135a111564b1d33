@@ -1,0 +1,11 @@
+package com.boavistainfo.bvsis.entities;
+
+import java.time.Instant;
+
+public class pedido {
+	
+	private Long id;
+	private Instant datahora;
+	private Cliente client;
+
+}

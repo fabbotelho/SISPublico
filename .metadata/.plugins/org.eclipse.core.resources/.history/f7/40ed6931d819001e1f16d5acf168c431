@@ -1,0 +1,5 @@
+package com.boavistainfo.bvsis.resources.exceptions;
+
+public class ResourceExceptionHandler {
+
+}

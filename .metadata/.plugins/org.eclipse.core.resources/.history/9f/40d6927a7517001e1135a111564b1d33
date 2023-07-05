@@ -1,0 +1,16 @@
+package com.boavistainfo.bvsis.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import com.boavistainfo.bvsis.repositories.ClienteRepository;
+
+@Configuration
+@Profile("test")
+public class TesteConfig {
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+
+}

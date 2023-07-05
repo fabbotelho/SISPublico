@@ -1,0 +1,31 @@
+package com.boavistainfo.bvsis.config;
+
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import com.boavistainfo.bvsis.entities.Cliente;
+import com.boavistainfo.bvsis.repositories.ClienteRepository;
+
+@Configuration
+@Profile("test")
+public class TesteConfig implements CommandLineRunner{
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		Cliente c1 = new Cliente(null,"fabricio","Rua A"," 95","","Alto","20.531-480","21 99695-9344","","");
+		Cliente c2 = new Cliente(null,"fabio","Rua A"," 96","","Alto da boa vista","20.531-480","21 99695-9545","","");
+		
+		clienteRepository.saveAll(Arrays.asList(c1,c2));
+	}
+	
+	
+
+}

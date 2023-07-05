@@ -1,0 +1,5 @@
+package com.boavistainfo.bvsis.entities;
+
+public class Pagamento {
+
+}

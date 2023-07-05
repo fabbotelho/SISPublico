@@ -1,0 +1,76 @@
+package com.boavistainfo.bvsis.config;
+
+import java.time.Instant;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import com.boavistainfo.bvsis.entities.Category;
+import com.boavistainfo.bvsis.entities.Cliente;
+import com.boavistainfo.bvsis.entities.Pedido;
+import com.boavistainfo.bvsis.entities.Produto;
+import com.boavistainfo.bvsis.entities.enums.PedidoStatus;
+import com.boavistainfo.bvsis.repositories.CategoryRepository;
+import com.boavistainfo.bvsis.repositories.ClienteRepository;
+import com.boavistainfo.bvsis.repositories.PedidoRepository;
+import com.boavistainfo.bvsis.repositories.ProdutoRepository;
+
+@Configuration
+@Profile("test")
+public class TesteConfig implements CommandLineRunner{
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
+		
+		Produto pd1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Produto pd2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Produto pd3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Produto pd4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Produto pd5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		
+		Cliente c1 = new Cliente(null,"fabricio","Rua A"," 95","casa","Alto","20.531-480","21 99695-9344","21 97026-2485","n");
+		Cliente c2 = new Cliente(null,"fabio","Rua A"," 96","c2","Alto da boa vista","20.531-480","21 99695-9545","21 2495-6654","M");
+		
+		Pedido p1 = new Pedido(null, Instant.parse("2023-06-23T18:53:07Z"),PedidoStatus.AGUARDANDO_PAGAMENTO,"", c1);
+		Pedido p2 = new Pedido(null, Instant.parse("2023-07-01T14:42:10Z"),PedidoStatus.PAGO,"", c2);
+		Pedido p3 = new Pedido(null, Instant.parse("2023-07-02T15:21:22Z"),PedidoStatus.CANCELADO,"", c1);
+		
+		clienteRepository.saveAll(Arrays.asList(c1,c2));
+		pedidoRepository.saveAll(Arrays.asList(p1,p2,p3));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		produtoRepository.saveAll(Arrays.asList(pd1,pd2,pd3,pd4,pd5));
+		
+		pd1.getCategories().add(cat2);
+		pd2.getCategories().add(cat1);
+		pd2.getCategories().add(cat3);
+		pd3.getCategories().add(cat3);
+		pd4.getCategories().add(cat3);
+		pd5.getCategories().add(cat2);
+		
+		produtoRepository.saveAll(Arrays.asList(pd1,pd2,pd3,pd4,pd5));
+		
+	}
+	
+	
+
+}
